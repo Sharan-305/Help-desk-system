@@ -1,0 +1,33 @@
+{
+  "name": "cloud-help-desk-system",
+  "version": "1.0.0",
+  "description": "Intermediate Cloud-Based Help Desk Ticket System built with Node.js, Express, MongoDB Native Driver, JWT, and Vanilla Frontend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "seed": "node seed.js"
+  },
+  "keywords": [
+    "cloud-computing",
+    "help-desk",
+    "mongodb",
+    "express",
+    "nodejs",
+    "rest-api",
+    "jwt"
+  ],
+  "author": "B.Tech AI & Data Science Student",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

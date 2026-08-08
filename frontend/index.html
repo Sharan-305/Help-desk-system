@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Help Desk System | Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero {
+      padding: 80px 32px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-blush);
+      border: 1px solid var(--border-color);
+      color: var(--color-amber);
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--color-espresso);
+    }
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 32px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 32px;
+    }
+    .portal-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease;
+    }
+    .portal-box:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-amber);
+      box-shadow: var(--shadow-md);
+    }
+    .portal-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Clean Top Navigation Header Bar -->
+  <header class="top-jira-bar">
+    <div class="jira-nav-left">
+      <a href="tickets.html" class="jira-brand">
+        <span class="jira-brand-icon">⚡</span>
+        <span>Cloud Help Desk</span>
+      </a>
+    </div>
+    <div class="jira-nav-right">
+      <a href="login.html" class="btn btn-secondary">Sign In</a>
+      <a href="register.html" class="btn btn-primary">Get Started</a>
+    </div>
+  </header>
+
+  <section class="hero" style="margin-top: 56px;">
+    <div class="hero-badge">
+      ⚡ Node.js • Express • Native MongoDB Driver • JWT Auth • Cloud Hosted
+    </div>
+    <h1 class="hero-title">Enterprise Cloud Support Desk Solution</h1>
+    <p class="hero-subtitle">
+      Streamline customer support requests, manage SLA priorities, assign tickets to agents, and monitor system metrics.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 32px;">
+      <a href="login.html" class="btn btn-primary" style="padding: 10px 24px; font-size: 15px;">Access Support Portal</a>
+      <a href="register.html" class="btn btn-secondary" style="padding: 10px 24px; font-size: 15px;">Create Account</a>
+    </div>
+  </section>
+
+  <section class="features-grid">
+    <div class="portal-box">
+      <div class="portal-icon">👤</div>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--color-espresso);">Customer Portal</h3>
+      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+        Register accounts, create support tickets with priority levels, track resolution status, and participate in discussion threads.
+      </p>
+      <a href="login.html" class="btn btn-secondary btn-sm">Customer Sign In</a>
+    </div>
+
+    <div class="portal-box">
+      <div class="portal-icon">🎧</div>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--color-espresso);">Support Agent Portal</h3>
+      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+        View assigned tickets, update workflow status (In Progress, Resolved), post resolution notes, and manage SLA priorities.
+      </p>
+      <a href="login.html" class="btn btn-secondary btn-sm">Agent Sign In</a>
+    </div>
+
+    <div class="portal-box">
+      <div class="portal-icon">🛡️</div>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--color-espresso);">Admin Control Center</h3>
+      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+        Monitor real-time system metrics, manage user roles & departments, assign tickets to agents, and configure ticket categories.
+      </p>
+      <a href="login.html" class="btn btn-secondary btn-sm">Admin Sign In</a>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: 32px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 12px; margin-top: auto; background: #FFFFFF;">
+    Cloud-Based Help Desk Ticket System &copy; 2026
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

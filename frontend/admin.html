@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Control Center | Cloud Help Desk System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tickets.css">
+</head>
+<body>
+  <!-- Clean Top Navigation Bar -->
+  <header class="top-jira-bar">
+    <div class="jira-nav-left">
+      <a href="tickets.html" class="jira-brand">
+        <span class="jira-brand-icon">⚡</span>
+        <span>Cloud Help Desk</span>
+      </a>
+      <nav class="jira-menu-links">
+        <a href="dashboard.html" class="jira-menu-link">Dashboard</a>
+        <a href="tickets.html" class="jira-menu-link">Incidents</a>
+        <a href="admin.html" class="jira-menu-link active admin-only">Administration</a>
+      </nav>
+    </div>
+    <div class="jira-nav-right">
+      <button class="btn btn-primary" onclick="openModal('createCategoryModal')">+ Add Category</button>
+      <div class="jira-search-bar">
+        <span class="jira-search-icon">🔍</span>
+        <input type="text" class="jira-search-input" placeholder="Search...">
+      </div>
+      <button class="jira-icon-btn" title="Settings" onclick="openSettingsModal()">⚙️</button>
+      <div class="avatar" style="width: 28px; height: 28px; font-size: 11px;">A</div>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Clean Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">🚀</div>
+        <div>
+          <div class="brand-text">HelpDesk Cloud</div>
+          <div class="brand-tag">Support Portal</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Service Queues</div>
+        <a href="dashboard.html" class="nav-item">
+          <span>📊 Overview Dashboard</span>
+        </a>
+        <a href="tickets.html" class="nav-item">
+          <span>🎫 Open Incidents</span>
+        </a>
+
+        <div class="nav-label admin-only">Administration</div>
+        <a href="admin.html" class="nav-item active admin-only">
+          <span>🛡️ Admin Panel</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+          <button class="btn-logout" title="Sign Out">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Body -->
+    <main class="main-content">
+      <div class="page-header-container">
+        <div>
+          <div class="breadcrumbs">
+            <a href="tickets.html">Administration</a> / <span>User & Role Management</span>
+          </div>
+          <h1 class="page-title">Admin Control Center</h1>
+        </div>
+        <div class="top-actions">
+          <button class="btn btn-primary" onclick="openModal('createCategoryModal')">
+            <span>+</span> Add Category
+          </button>
+        </div>
+      </div>
+
+      <div class="content-body">
+        <!-- User Management Table Card -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">User & Role Management</h3>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Promote users to Support Agent or Admin roles and assign departments</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="loadUsersTable()">🔄 Refresh Users</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User & Email</th>
+                  <th>System Role</th>
+                  <th>Department</th>
+                  <th>Joined Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 20px; color: var(--text-muted);">Loading system users...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ticket Categories Table Card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Ticket Categories Configuration</h3>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Manage support categories for ticket classification</p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="categoriesTableBody">
+                <tr>
+                  <td colspan="3" style="text-align: center; padding: 20px; color: var(--text-muted);">Loading categories...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Create Category Modal -->
+  <div class="modal-backdrop" id="createCategoryModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 700;">Add Ticket Category</h3>
+        <button class="modal-close" onclick="closeModal('createCategoryModal')">&times;</button>
+      </div>
+
+      <form id="createCategoryForm">
+        <div class="form-group">
+          <label class="form-label" for="categoryName">Category Name</label>
+          <input type="text" id="categoryName" class="form-control" placeholder="e.g. Cloud Storage Issue" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="categoryDescription">Description</label>
+          <textarea id="categoryDescription" class="form-control" rows="3" placeholder="Brief description of this category..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('createCategoryModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Settings & Theme Switcher Modal -->
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal-content" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">⚙️ User & Portal Settings</h3>
+        <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
+      </div>
+
+      <form id="settingsForm">
+        <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;">User Profile</div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" for="settingsName">Display Name</label>
+            <input type="text" id="settingsName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settingsEmail">Email Address</label>
+            <input type="email" id="settingsEmail" class="form-control" disabled style="opacity: 0.8;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="settingsDepartment">Department / Team</label>
+          <input type="text" id="settingsDepartment" class="form-control" placeholder="e.g. Cloud Operations">
+        </div>
+
+        <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin: 16px 0 10px; padding-top: 12px; border-top: 1px solid var(--border-color);">Preferences & Visual Theme</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" for="settingsTheme">Active Interface Theme</label>
+            <select id="settingsTheme" class="form-select">
+              <option value="earth">Blush & Champagne (Luxury Earth)</option>
+              <option value="jira">Atlassian Jira Classic Light</option>
+              <option value="dark">Charcoal & Electric Orange Dark</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settingsAutoRefresh">Dashboard Refresh Rate</label>
+            <select id="settingsAutoRefresh" class="form-select">
+              <option value="0">Off (Manual Only)</option>
+              <option value="30">30 Seconds</option>
+              <option value="60" selected>1 Minute</option>
+              <option value="300">5 Minutes</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 6px;">
+          <div class="form-group">
+            <label class="form-label" for="settingsDefaultPriority">Default Incident Priority</label>
+            <select id="settingsDefaultPriority" class="form-select">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 6px;">
+          <input type="checkbox" id="settingsNotifications" style="width: 16px; height: 16px; accent-color: var(--color-amber);" checked>
+          <label for="settingsNotifications" style="font-size: 13px; font-weight: 600; color: var(--text-primary); cursor: pointer;">
+            Receive email notifications for status updates and responses
+          </label>
+        </div>
+
+        <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin: 16px 0 10px; padding-top: 12px; border-top: 1px solid var(--border-color);">Change Password (Optional)</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" for="settingsCurrentPassword">Current Password</label>
+            <input type="password" id="settingsCurrentPassword" class="form-control" placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settingsNewPassword">New Password</label>
+            <input type="password" id="settingsNewPassword" class="form-control" placeholder="••••••••" minlength="6">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('settingsModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    function openModal(id) {
+      document.getElementById(id)?.classList.add('show');
+    }
+    function closeModal(id) {
+      document.getElementById(id)?.classList.remove('show');
+    }
+  </script>
+</body>
+</html>
